@@ -471,3 +471,202 @@
 {"event_id": "U6881", "event_type": "logout", "timestamp": 1750966777.10357}
 {"event_id": "U4043", "event_type": "logout", "timestamp": 1750966778.111118}
 {"event_id": "U4699", "event_type": "search", "timestamp": 1750966779.12176, "products": [{"product_id": "P493", "product_category": "Books", "price": "$5214"}, {"product_id": "P390", "product_category": "Electronics", "price": "$8034", "product_type": "Smartphone", "brand": "Samsung"}, {"product_id": "P178", "product_category": "Furniture", "price": "$1730"}]}
+{"event_id": "U3432", "event_type": "logout", "timestamp": 1751268459.042848}
+{"event_id": "U8627", "event_type": "logout", "timestamp": 1751268460.178446}
+{"event_id": "U3200", "event_type": "purchase", "timestamp": 1751268461.188076, "products": [{"product_id": "P472", "product_category": "Fashion", "price": "$560", "product_type": "Shirt", "brand": "Zara"}, {"product_id": "P343", "product_category": "Toys", "price": "$2057"}, {"product_id": "P484", "product_category": "Fashion", "price": "$4497", "product_type": "Dress", "brand": "Nike"}]}
+{"event_id": "U8860", "event_type": "logout", "timestamp": 1751268462.20161}
+{"event_id": "U7905", "event_type": "search", "timestamp": 1751268463.2113411, "products": [{"product_id": "P998", "product_category": "Furniture", "price": "$1314"}]}
+{"event_id": "U7719", "event_type": "search", "timestamp": 1751268464.2246861, "products": [{"product_id": "P701", "product_category": "Electronics", "price": "$3272", "product_type": "Smartphone", "brand": "Sony"}, {"product_id": "P573", "product_category": "Grocery", "price": "$7723"}]}
+{"event_id": "U8373", "event_type": "logout", "timestamp": 1751268465.23793}
+{"event_id": "U7342", "event_type": "add_to_cart", "timestamp": 1751268466.251737, "products": [{"product_id": "P209", "product_category": "Furniture", "price": "$4707"}, {"product_id": "P560", "product_category": "Sports and Fitness", "price": "$9829"}, {"product_id": "P191", "product_category": "Grocery", "price": "$2515"}]}
+{"event_id": "U6223", "event_type": "logout", "timestamp": 1751268467.262475}
+{"event_id": "U5739", "event_type": "purchase", "timestamp": 1751268468.27523, "products": [{"product_id": "P296", "product_category": "Books", "price": "$3730"}, {"product_id": "P852", "product_category": "Home", "price": "$7045"}, {"product_id": "P972", "product_category": "Grocery", "price": "$9807"}]}
+{"event_id": "U4514", "event_type": "search", "timestamp": 1751268469.289449, "products": [{"product_id": "P701", "product_category": "Sports and Fitness", "price": "$3015"}]}
+{"event_id": "U7835", "event_type": "purchase", "timestamp": 1751268470.2944891, "products": [{"product_id": "P264", "product_category": "Fashion", "price": "$5123", "product_type": "Shirt", "brand": "Nike"}]}
+{"event_id": "U5579", "event_type": "purchase", "timestamp": 1751268471.299812, "products": [{"product_id": "P379", "product_category": "Books", "price": "$5126"}, {"product_id": "P132", "product_category": "Toys", "price": "$6848"}]}
+{"event_id": "U6531", "event_type": "add_to_cart", "timestamp": 1751268472.307334, "products": [{"product_id": "P818", "product_category": "Toys", "price": "$8751"}]}
+{"event_id": "U9579", "event_type": "add_to_cart", "timestamp": 1751268473.3155782, "products": [{"product_id": "P132", "product_category": "Grocery", "price": "$7906"}, {"product_id": "P503", "product_category": "Home", "price": "$5085"}]}
+{"event_id": "U2764", "event_type": "add_to_cart", "timestamp": 1751268474.324069, "products": [{"product_id": "P117", "product_category": "Grocery", "price": "$6223"}]}
+{"event_id": "U1336", "event_type": "logout", "timestamp": 1751268475.3376808}
+{"event_id": "U8232", "event_type": "search", "timestamp": 1751268476.344477, "products": [{"product_id": "P775", "product_category": "Home", "price": "$6075"}, {"product_id": "P677", "product_category": "Grocery", "price": "$2529"}]}
+{"event_id": "U2838", "event_type": "logout", "timestamp": 1751268477.348109}
+{"event_id": "U2382", "event_type": "search", "timestamp": 1751268478.35461, "products": [{"product_id": "P281", "product_category": "Books", "price": "$6214"}]}
+{"event_id": "U8688", "event_type": "login", "timestamp": 1751268479.3660312}
+{"event_id": "U8288", "event_type": "logout", "timestamp": 1751268480.374847}
+{"event_id": "U4581", "event_type": "view_product", "timestamp": 1751268481.3833752, "products": [{"product_id": "P325", "product_category": "Home", "price": "$4154"}]}
+{"event_id": "U5819", "event_type": "view_product", "timestamp": 1751268482.394099, "products": [{"product_id": "P992", "product_category": "Beauty", "price": "$8458"}]}
+{"event_id": "U8219", "event_type": "purchase", "timestamp": 1751268483.401769, "products": [{"product_id": "P253", "product_category": "Fashion", "price": "$9840", "product_type": "Shoes", "brand": "Nike"}]}
+{"event_id": "U7477", "event_type": "logout", "timestamp": 1751268484.406998}
+{"event_id": "U2446", "event_type": "view_product", "timestamp": 1751268485.411081, "products": [{"product_id": "P626", "product_category": "Electronics", "price": "$9648", "product_type": "Camera", "brand": "Sony"}, {"product_id": "P340", "product_category": "Fashion", "price": "$8575", "product_type": "Dress", "brand": "Zara"}]}
+{"event_id": "U4847", "event_type": "add_to_cart", "timestamp": 1751268486.419756, "products": [{"product_id": "P169", "product_category": "Electronics", "price": "$525", "product_type": "Camera", "brand": "Samsung"}]}
+{"event_id": "U4116", "event_type": "purchase", "timestamp": 1751268487.4278169, "products": [{"product_id": "P997", "product_category": "Home", "price": "$3202"}]}
+{"event_id": "U6436", "event_type": "view_product", "timestamp": 1751268488.435831, "products": [{"product_id": "P836", "product_category": "Grocery", "price": "$4882"}, {"product_id": "P874", "product_category": "Grocery", "price": "$2559"}, {"product_id": "P641", "product_category": "Home", "price": "$1138"}]}
+{"event_id": "U3241", "event_type": "login", "timestamp": 1751268489.443732}
+{"event_id": "U9071", "event_type": "search", "timestamp": 1751268490.451649, "products": [{"product_id": "P535", "product_category": "Home", "price": "$8465"}, {"product_id": "P147", "product_category": "Beauty", "price": "$5068"}]}
+{"event_id": "U9730", "event_type": "logout", "timestamp": 1751268491.459862}
+{"event_id": "U7752", "event_type": "add_to_cart", "timestamp": 1751268492.4668758, "products": [{"product_id": "P356", "product_category": "Beauty", "price": "$8352"}]}
+{"event_id": "U4515", "event_type": "logout", "timestamp": 1751268493.4749599}
+{"event_id": "U2376", "event_type": "purchase", "timestamp": 1751268494.4874, "products": [{"product_id": "P904", "product_category": "Beauty", "price": "$6605"}, {"product_id": "P477", "product_category": "Furniture", "price": "$7080"}]}
+{"event_id": "U8283", "event_type": "logout", "timestamp": 1751268495.494349}
+{"event_id": "U3597", "event_type": "search", "timestamp": 1751268496.5035799, "products": [{"product_id": "P636", "product_category": "Home", "price": "$3731"}, {"product_id": "P630", "product_category": "Furniture", "price": "$1479"}]}
+{"event_id": "U3956", "event_type": "add_to_cart", "timestamp": 1751268497.510974, "products": [{"product_id": "P602", "product_category": "Electronics", "price": "$4561", "product_type": "Smartphone", "brand": "Sony"}, {"product_id": "P861", "product_category": "Fashion", "price": "$712", "product_type": "Shirt", "brand": "Nike"}, {"product_id": "P231", "product_category": "Home", "price": "$5157"}]}
+{"event_id": "U5017", "event_type": "logout", "timestamp": 1751268498.520513}
+{"event_id": "U8821", "event_type": "purchase", "timestamp": 1751268499.531127, "products": [{"product_id": "P933", "product_category": "Toys", "price": "$7700"}]}
+{"event_id": "U7967", "event_type": "add_to_cart", "timestamp": 1751268500.539479, "products": [{"product_id": "P122", "product_category": "Home", "price": "$6117"}, {"product_id": "P384", "product_category": "Fashion", "price": "$6557", "product_type": "Shirt", "brand": "Nike"}, {"product_id": "P469", "product_category": "Home", "price": "$5892"}]}
+{"event_id": "U6291", "event_type": "purchase", "timestamp": 1751268501.5442638, "products": [{"product_id": "P518", "product_category": "Electronics", "price": "$3290", "product_type": "Camera", "brand": "Sony"}, {"product_id": "P741", "product_category": "Toys", "price": "$4557"}]}
+{"event_id": "U4867", "event_type": "logout", "timestamp": 1751268502.548387}
+{"event_id": "U9024", "event_type": "search", "timestamp": 1751268503.556795, "products": [{"product_id": "P491", "product_category": "Books", "price": "$6749"}, {"product_id": "P950", "product_category": "Beauty", "price": "$4396"}]}
+{"event_id": "U1495", "event_type": "login", "timestamp": 1751268504.5665212}
+{"event_id": "U7354", "event_type": "search", "timestamp": 1751268505.5746949, "products": [{"product_id": "P236", "product_category": "Home", "price": "$8870"}]}
+{"event_id": "U4634", "event_type": "view_product", "timestamp": 1751268506.584791, "products": [{"product_id": "P981", "product_category": "Fashion", "price": "$2547", "product_type": "Dress", "brand": "Nike"}]}
+{"event_id": "U1571", "event_type": "view_product", "timestamp": 1751268507.592631, "products": [{"product_id": "P153", "product_category": "Fashion", "price": "$5019", "product_type": "Shoes", "brand": "Nike"}, {"product_id": "P665", "product_category": "Beauty", "price": "$1850"}]}
+{"event_id": "U7016", "event_type": "add_to_cart", "timestamp": 1751268508.600055, "products": [{"product_id": "P404", "product_category": "Beauty", "price": "$9330"}, {"product_id": "P712", "product_category": "Home", "price": "$6372"}]}
+{"event_id": "U8102", "event_type": "search", "timestamp": 1751268509.6076689, "products": [{"product_id": "P334", "product_category": "Home", "price": "$4285"}, {"product_id": "P861", "product_category": "Books", "price": "$3578"}]}
+{"event_id": "U9049", "event_type": "login", "timestamp": 1751268510.616259}
+{"event_id": "U9380", "event_type": "view_product", "timestamp": 1751268511.624502, "products": [{"product_id": "P769", "product_category": "Books", "price": "$3508"}, {"product_id": "P233", "product_category": "Grocery", "price": "$1709"}, {"product_id": "P820", "product_category": "Grocery", "price": "$4775"}]}
+{"event_id": "U8164", "event_type": "logout", "timestamp": 1751268512.6374772}
+{"event_id": "U9348", "event_type": "login", "timestamp": 1751268513.6470668}
+{"event_id": "U6416", "event_type": "search", "timestamp": 1751268514.659019, "products": [{"product_id": "P453", "product_category": "Home", "price": "$5306"}, {"product_id": "P430", "product_category": "Books", "price": "$7923"}]}
+{"event_id": "U5637", "event_type": "logout", "timestamp": 1751268515.668281}
+{"event_id": "U6039", "event_type": "login", "timestamp": 1751268516.678154}
+{"event_id": "U5228", "event_type": "purchase", "timestamp": 1751268517.687095, "products": [{"product_id": "P418", "product_category": "Toys", "price": "$9725"}, {"product_id": "P125", "product_category": "Books", "price": "$1881"}, {"product_id": "P501", "product_category": "Home", "price": "$9024"}]}
+{"event_id": "U1194", "event_type": "add_to_cart", "timestamp": 1751268518.6953092, "products": [{"product_id": "P852", "product_category": "Toys", "price": "$1162"}, {"product_id": "P147", "product_category": "Fashion", "price": "$2149", "product_type": "Shoes", "brand": "Nike"}]}
+{"event_id": "U7537", "event_type": "logout", "timestamp": 1751268519.7046971}
+{"event_id": "U3187", "event_type": "add_to_cart", "timestamp": 1751268520.7149591, "products": [{"product_id": "P204", "product_category": "Home", "price": "$3461"}]}
+{"event_id": "U2732", "event_type": "search", "timestamp": 1751268521.72499, "products": [{"product_id": "P820", "product_category": "Fashion", "price": "$2021", "product_type": "Shoes", "brand": "Puma"}, {"product_id": "P794", "product_category": "Books", "price": "$8837"}, {"product_id": "P684", "product_category": "Grocery", "price": "$5591"}]}
+{"event_id": "U2508", "event_type": "add_to_cart", "timestamp": 1751268522.73247, "products": [{"product_id": "P367", "product_category": "Toys", "price": "$5765"}]}
+{"event_id": "U6797", "event_type": "add_to_cart", "timestamp": 1751268523.740272, "products": [{"product_id": "P279", "product_category": "Toys", "price": "$5790"}, {"product_id": "P460", "product_category": "Sports and Fitness", "price": "$2830"}]}
+{"event_id": "U4380", "event_type": "login", "timestamp": 1751268524.7507699}
+{"event_id": "U7096", "event_type": "purchase", "timestamp": 1751268525.760303, "products": [{"product_id": "P445", "product_category": "Books", "price": "$7287"}, {"product_id": "P380", "product_category": "Toys", "price": "$2174"}, {"product_id": "P820", "product_category": "Books", "price": "$2073"}]}
+{"event_id": "U8628", "event_type": "login", "timestamp": 1751268526.767811}
+{"event_id": "U1423", "event_type": "login", "timestamp": 1751268527.775888}
+{"event_id": "U2018", "event_type": "view_product", "timestamp": 1751268528.781216, "products": [{"product_id": "P393", "product_category": "Home", "price": "$3223"}]}
+{"event_id": "U5829", "event_type": "purchase", "timestamp": 1751268529.788147, "products": [{"product_id": "P182", "product_category": "Electronics", "price": "$8437", "product_type": "Smartphone", "brand": "Apple"}, {"product_id": "P272", "product_category": "Toys", "price": "$8011"}, {"product_id": "P932", "product_category": "Furniture", "price": "$3847"}]}
+{"event_id": "U5149", "event_type": "add_to_cart", "timestamp": 1751268530.797458, "products": [{"product_id": "P698", "product_category": "Sports and Fitness", "price": "$4384"}]}
+{"event_id": "U3105", "event_type": "view_product", "timestamp": 1751268531.803071, "products": [{"product_id": "P755", "product_category": "Grocery", "price": "$8220"}]}
+{"event_id": "U1689", "event_type": "search", "timestamp": 1751268532.810797, "products": [{"product_id": "P861", "product_category": "Furniture", "price": "$8532"}, {"product_id": "P814", "product_category": "Home", "price": "$3584"}, {"product_id": "P194", "product_category": "Sports and Fitness", "price": "$1607"}]}
+{"event_id": "U1623", "event_type": "search", "timestamp": 1751268533.823811, "products": [{"product_id": "P211", "product_category": "Beauty", "price": "$7632"}, {"product_id": "P139", "product_category": "Grocery", "price": "$1899"}]}
+{"event_id": "U8240", "event_type": "add_to_cart", "timestamp": 1751268534.832216, "products": [{"product_id": "P160", "product_category": "Books", "price": "$522"}]}
+{"event_id": "U3430", "event_type": "add_to_cart", "timestamp": 1751268535.843682, "products": [{"product_id": "P896", "product_category": "Toys", "price": "$8070"}, {"product_id": "P986", "product_category": "Furniture", "price": "$4866"}, {"product_id": "P417", "product_category": "Books", "price": "$966"}]}
+{"event_id": "U4686", "event_type": "logout", "timestamp": 1751268536.853997}
+{"event_id": "U2082", "event_type": "logout", "timestamp": 1751268537.859926}
+{"event_id": "U2590", "event_type": "login", "timestamp": 1751268538.868442}
+{"event_id": "U1858", "event_type": "search", "timestamp": 1751268539.881272, "products": [{"product_id": "P916", "product_category": "Electronics", "price": "$5897", "product_type": "Laptop", "brand": "Sony"}]}
+{"event_id": "U2518", "event_type": "view_product", "timestamp": 1751268540.8933702, "products": [{"product_id": "P218", "product_category": "Grocery", "price": "$1070"}, {"product_id": "P770", "product_category": "Grocery", "price": "$758"}, {"product_id": "P937", "product_category": "Fashion", "price": "$9669", "product_type": "Shoes", "brand": "Puma"}]}
+{"event_id": "U3686", "event_type": "add_to_cart", "timestamp": 1751268541.903237, "products": [{"product_id": "P191", "product_category": "Grocery", "price": "$6462"}]}
+{"event_id": "U7136", "event_type": "logout", "timestamp": 1751268542.911304}
+{"event_id": "U8796", "event_type": "purchase", "timestamp": 1751268543.918943, "products": [{"product_id": "P801", "product_category": "Beauty", "price": "$3561"}, {"product_id": "P297", "product_category": "Furniture", "price": "$7642"}]}
+{"event_id": "U3984", "event_type": "logout", "timestamp": 1751268544.926572}
+{"event_id": "U4843", "event_type": "view_product", "timestamp": 1751268545.935083, "products": [{"product_id": "P803", "product_category": "Books", "price": "$5398"}, {"product_id": "P610", "product_category": "Beauty", "price": "$8677"}, {"product_id": "P557", "product_category": "Toys", "price": "$6149"}]}
+{"event_id": "U4080", "event_type": "search", "timestamp": 1751268546.944509, "products": [{"product_id": "P480", "product_category": "Sports and Fitness", "price": "$5467"}, {"product_id": "P831", "product_category": "Home", "price": "$2707"}, {"product_id": "P901", "product_category": "Fashion", "price": "$1394", "product_type": "Shirt", "brand": "Puma"}]}
+{"event_id": "U8564", "event_type": "add_to_cart", "timestamp": 1751268547.954331, "products": [{"product_id": "P559", "product_category": "Sports and Fitness", "price": "$9838"}]}
+{"event_id": "U5715", "event_type": "search", "timestamp": 1751268548.96437, "products": [{"product_id": "P745", "product_category": "Home", "price": "$3799"}, {"product_id": "P905", "product_category": "Sports and Fitness", "price": "$9147"}]}
+{"event_id": "U7073", "event_type": "logout", "timestamp": 1751268549.9759748}
+{"event_id": "U2902", "event_type": "view_product", "timestamp": 1751268550.983447, "products": [{"product_id": "P459", "product_category": "Home", "price": "$3927"}]}
+{"event_id": "U3287", "event_type": "login", "timestamp": 1751268551.995305}
+{"event_id": "U5440", "event_type": "logout", "timestamp": 1751268553.00597}
+{"event_id": "U4011", "event_type": "purchase", "timestamp": 1751268554.0169191, "products": [{"product_id": "P621", "product_category": "Furniture", "price": "$8816"}]}
+{"event_id": "U8006", "event_type": "logout", "timestamp": 1751268555.026199}
+{"event_id": "U3747", "event_type": "purchase", "timestamp": 1751268556.036383, "products": [{"product_id": "P460", "product_category": "Beauty", "price": "$9738"}, {"product_id": "P560", "product_category": "Toys", "price": "$2826"}]}
+{"event_id": "U6962", "event_type": "login", "timestamp": 1751268557.044499}
+{"event_id": "U6554", "event_type": "search", "timestamp": 1751268558.054416, "products": [{"product_id": "P126", "product_category": "Toys", "price": "$3743"}, {"product_id": "P827", "product_category": "Sports and Fitness", "price": "$1194"}]}
+{"event_id": "U8540", "event_type": "add_to_cart", "timestamp": 1751268559.0627031, "products": [{"product_id": "P724", "product_category": "Grocery", "price": "$8698"}, {"product_id": "P109", "product_category": "Fashion", "price": "$5696", "product_type": "Shirt", "brand": "Puma"}, {"product_id": "P376", "product_category": "Grocery", "price": "$3660"}]}
+{"event_id": "U1821", "event_type": "logout", "timestamp": 1751268560.070741}
+{"event_id": "U9668", "event_type": "search", "timestamp": 1751268561.081138, "products": [{"product_id": "P299", "product_category": "Home", "price": "$3617"}, {"product_id": "P127", "product_category": "Sports and Fitness", "price": "$7193"}]}
+{"event_id": "U6098", "event_type": "login", "timestamp": 1751268562.087623}
+{"event_id": "U4743", "event_type": "logout", "timestamp": 1751268563.096027}
+{"event_id": "U8434", "event_type": "add_to_cart", "timestamp": 1751268564.1040692, "products": [{"product_id": "P408", "product_category": "Home", "price": "$8100"}]}
+{"event_id": "U6387", "event_type": "login", "timestamp": 1751268565.1152298}
+{"event_id": "U9964", "event_type": "login", "timestamp": 1751268566.126624}
+{"event_id": "U7461", "event_type": "logout", "timestamp": 1751268567.137474}
+{"event_id": "U7856", "event_type": "view_product", "timestamp": 1751268568.148235, "products": [{"product_id": "P844", "product_category": "Books", "price": "$3133"}, {"product_id": "P994", "product_category": "Sports and Fitness", "price": "$6151"}, {"product_id": "P591", "product_category": "Sports and Fitness", "price": "$7409"}]}
+{"event_id": "U4742", "event_type": "login", "timestamp": 1751268569.152201}
+{"event_id": "U1060", "event_type": "login", "timestamp": 1751268570.1605241}
+{"event_id": "U5675", "event_type": "search", "timestamp": 1751268571.167916, "products": [{"product_id": "P162", "product_category": "Fashion", "price": "$8859", "product_type": "Dress", "brand": "Nike"}]}
+{"event_id": "U8445", "event_type": "add_to_cart", "timestamp": 1751268572.177109, "products": [{"product_id": "P225", "product_category": "Home", "price": "$2412"}, {"product_id": "P233", "product_category": "Books", "price": "$9726"}, {"product_id": "P891", "product_category": "Electronics", "price": "$1949", "product_type": "Laptop", "brand": "Sony"}]}
+{"event_id": "U1434", "event_type": "search", "timestamp": 1751268573.185678, "products": [{"product_id": "P666", "product_category": "Sports and Fitness", "price": "$4792"}, {"product_id": "P738", "product_category": "Fashion", "price": "$3610", "product_type": "Dress", "brand": "Nike"}]}
+{"event_id": "U3979", "event_type": "logout", "timestamp": 1751268574.20221}
+{"event_id": "U2413", "event_type": "logout", "timestamp": 1751268575.209855}
+{"event_id": "U4161", "event_type": "purchase", "timestamp": 1751268576.219778, "products": [{"product_id": "P797", "product_category": "Fashion", "price": "$1138", "product_type": "Dress", "brand": "Zara"}]}
+{"event_id": "U8675", "event_type": "add_to_cart", "timestamp": 1751268577.231285, "products": [{"product_id": "P767", "product_category": "Fashion", "price": "$1009", "product_type": "Shirt", "brand": "Zara"}, {"product_id": "P942", "product_category": "Electronics", "price": "$3646", "product_type": "Laptop", "brand": "Sony"}]}
+{"event_id": "U8761", "event_type": "view_product", "timestamp": 1751268578.2413518, "products": [{"product_id": "P506", "product_category": "Books", "price": "$6656"}]}
+{"event_id": "U9451", "event_type": "purchase", "timestamp": 1751268579.253002, "products": [{"product_id": "P649", "product_category": "Sports and Fitness", "price": "$4785"}, {"product_id": "P464", "product_category": "Grocery", "price": "$1528"}]}
+{"event_id": "U7352", "event_type": "add_to_cart", "timestamp": 1751268580.262778, "products": [{"product_id": "P755", "product_category": "Electronics", "price": "$1414", "product_type": "Smartphone", "brand": "Apple"}, {"product_id": "P602", "product_category": "Beauty", "price": "$8009"}, {"product_id": "P804", "product_category": "Books", "price": "$3702"}]}
+{"event_id": "U6915", "event_type": "purchase", "timestamp": 1751268581.2753239, "products": [{"product_id": "P632", "product_category": "Beauty", "price": "$8621"}, {"product_id": "P924", "product_category": "Fashion", "price": "$8941", "product_type": "Shoes", "brand": "Puma"}, {"product_id": "P175", "product_category": "Sports and Fitness", "price": "$6827"}]}
+{"event_id": "U2591", "event_type": "login", "timestamp": 1751268582.285988}
+{"event_id": "U5202", "event_type": "search", "timestamp": 1751268583.294861, "products": [{"product_id": "P261", "product_category": "Furniture", "price": "$1486"}]}
+{"event_id": "U3252", "event_type": "logout", "timestamp": 1751268584.3033988}
+{"event_id": "U5634", "event_type": "search", "timestamp": 1751268585.3132958, "products": [{"product_id": "P519", "product_category": "Sports and Fitness", "price": "$5157"}, {"product_id": "P956", "product_category": "Electronics", "price": "$939", "product_type": "Smartphone", "brand": "Apple"}, {"product_id": "P103", "product_category": "Furniture", "price": "$6430"}]}
+{"event_id": "U6703", "event_type": "logout", "timestamp": 1751268586.324573}
+{"event_id": "U5287", "event_type": "view_product", "timestamp": 1751268587.3342998, "products": [{"product_id": "P808", "product_category": "Books", "price": "$4288"}, {"product_id": "P985", "product_category": "Grocery", "price": "$1862"}, {"product_id": "P801", "product_category": "Grocery", "price": "$7681"}]}
+{"event_id": "U8825", "event_type": "purchase", "timestamp": 1751312253.018243, "products": [{"product_id": "P321", "product_category": "Sports and Fitness", "price": "$8838"}, {"product_id": "P817", "product_category": "Fashion", "price": "$1506", "product_type": "Dress", "brand": "Nike"}, {"product_id": "P185", "product_category": "Books", "price": "$8613"}]}
+{"event_id": "U1087", "event_type": "purchase", "timestamp": 1751312254.138776, "products": [{"product_id": "P598", "product_category": "Furniture", "price": "$2705"}]}
+{"event_id": "U7156", "event_type": "logout", "timestamp": 1751312255.1484401}
+{"event_id": "U4639", "event_type": "login", "timestamp": 1751312256.161959}
+{"event_id": "U6330", "event_type": "add_to_cart", "timestamp": 1751312257.17155, "products": [{"product_id": "P848", "product_category": "Grocery", "price": "$1915"}]}
+{"event_id": "U4164", "event_type": "search", "timestamp": 1751312258.179862, "products": [{"product_id": "P481", "product_category": "Fashion", "price": "$8275", "product_type": "Shoes", "brand": "Puma"}, {"product_id": "P931", "product_category": "Fashion", "price": "$3858", "product_type": "Dress", "brand": "Nike"}]}
+{"event_id": "U4673", "event_type": "add_to_cart", "timestamp": 1751312259.1891022, "products": [{"product_id": "P873", "product_category": "Beauty", "price": "$9791"}, {"product_id": "P883", "product_category": "Sports and Fitness", "price": "$9357"}]}
+{"event_id": "U8189", "event_type": "search", "timestamp": 1751312260.193799, "products": [{"product_id": "P203", "product_category": "Home", "price": "$2120"}, {"product_id": "P345", "product_category": "Books", "price": "$6033"}, {"product_id": "P284", "product_category": "Home", "price": "$8572"}]}
+{"event_id": "U9924", "event_type": "purchase", "timestamp": 1751312261.201226, "products": [{"product_id": "P809", "product_category": "Books", "price": "$1240"}, {"product_id": "P826", "product_category": "Sports and Fitness", "price": "$9898"}, {"product_id": "P757", "product_category": "Toys", "price": "$1748"}]}
+{"event_id": "U7535", "event_type": "login", "timestamp": 1751312262.203866}
+{"event_id": "U6528", "event_type": "purchase", "timestamp": 1751312263.2104802, "products": [{"product_id": "P786", "product_category": "Fashion", "price": "$2353", "product_type": "Shoes", "brand": "Nike"}]}
+{"event_id": "U2335", "event_type": "view_product", "timestamp": 1751312264.217536, "products": [{"product_id": "P329", "product_category": "Furniture", "price": "$2119"}, {"product_id": "P714", "product_category": "Grocery", "price": "$5487"}, {"product_id": "P225", "product_category": "Toys", "price": "$9000"}]}
+{"event_id": "U1527", "event_type": "view_product", "timestamp": 1751312265.223022, "products": [{"product_id": "P155", "product_category": "Grocery", "price": "$6419"}, {"product_id": "P120", "product_category": "Furniture", "price": "$4014"}, {"product_id": "P484", "product_category": "Toys", "price": "$3528"}]}
+{"event_id": "U1826", "event_type": "logout", "timestamp": 1751312266.230295}
+{"event_id": "U6627", "event_type": "logout", "timestamp": 1751312267.237479}
+{"event_id": "U3082", "event_type": "purchase", "timestamp": 1751312268.249426, "products": [{"product_id": "P757", "product_category": "Books", "price": "$8201"}, {"product_id": "P971", "product_category": "Electronics", "price": "$8302", "product_type": "Smartphone", "brand": "Apple"}]}
+{"event_id": "U2530", "event_type": "view_product", "timestamp": 1751312269.25372, "products": [{"product_id": "P355", "product_category": "Furniture", "price": "$2997"}, {"product_id": "P368", "product_category": "Books", "price": "$1230"}]}
+{"event_id": "U2222", "event_type": "login", "timestamp": 1751312270.259916}
+{"event_id": "U3412", "event_type": "view_product", "timestamp": 1751312271.262866, "products": [{"product_id": "P458", "product_category": "Toys", "price": "$5218"}]}
+{"event_id": "U7774", "event_type": "purchase", "timestamp": 1751312272.268179, "products": [{"product_id": "P947", "product_category": "Toys", "price": "$9226"}]}
+{"event_id": "U3063", "event_type": "login", "timestamp": 1751312273.2759948}
+{"event_id": "U2882", "event_type": "add_to_cart", "timestamp": 1751312274.320226, "products": [{"product_id": "P307", "product_category": "Fashion", "price": "$1885", "product_type": "Dress", "brand": "Zara"}, {"product_id": "P768", "product_category": "Furniture", "price": "$8213"}]}
+{"event_id": "U1870", "event_type": "login", "timestamp": 1751312275.3273768}
+{"event_id": "U1157", "event_type": "add_to_cart", "timestamp": 1751312276.3293839, "products": [{"product_id": "P418", "product_category": "Fashion", "price": "$4708", "product_type": "Shoes", "brand": "Puma"}, {"product_id": "P719", "product_category": "Sports and Fitness", "price": "$988"}, {"product_id": "P522", "product_category": "Home", "price": "$3439"}]}
+{"event_id": "U4745", "event_type": "purchase", "timestamp": 1751312277.334696, "products": [{"product_id": "P820", "product_category": "Books", "price": "$6592"}]}
+{"event_id": "U8010", "event_type": "view_product", "timestamp": 1751312278.342674, "products": [{"product_id": "P457", "product_category": "Sports and Fitness", "price": "$5081"}]}
+{"event_id": "U4782", "event_type": "view_product", "timestamp": 1751312279.353319, "products": [{"product_id": "P595", "product_category": "Sports and Fitness", "price": "$590"}, {"product_id": "P972", "product_category": "Beauty", "price": "$6791"}]}
+{"event_id": "U8199", "event_type": "purchase", "timestamp": 1751312280.3561332, "products": [{"product_id": "P339", "product_category": "Furniture", "price": "$4544"}]}
+{"event_id": "U7791", "event_type": "view_product", "timestamp": 1751312281.3634272, "products": [{"product_id": "P762", "product_category": "Books", "price": "$5731"}]}
+{"event_id": "U5323", "event_type": "logout", "timestamp": 1751312282.366535}
+{"event_id": "U2043", "event_type": "logout", "timestamp": 1751312283.37}
+{"event_id": "U1740", "event_type": "view_product", "timestamp": 1751312284.3745751, "products": [{"product_id": "P912", "product_category": "Beauty", "price": "$3129"}]}
+{"event_id": "U6820", "event_type": "search", "timestamp": 1751312285.382468, "products": [{"product_id": "P405", "product_category": "Books", "price": "$7202"}, {"product_id": "P179", "product_category": "Books", "price": "$6248"}]}
+{"event_id": "U6713", "event_type": "view_product", "timestamp": 1751312286.430311, "products": [{"product_id": "P385", "product_category": "Fashion", "price": "$6106", "product_type": "Shoes", "brand": "Puma"}]}
+{"event_id": "U8529", "event_type": "view_product", "timestamp": 1751312287.4532428, "products": [{"product_id": "P252", "product_category": "Books", "price": "$3267"}, {"product_id": "P598", "product_category": "Beauty", "price": "$9941"}]}
+{"event_id": "U6280", "event_type": "login", "timestamp": 1751312288.46211}
+{"event_id": "U4473", "event_type": "search", "timestamp": 1751312289.469582, "products": [{"product_id": "P295", "product_category": "Toys", "price": "$2015"}, {"product_id": "P916", "product_category": "Electronics", "price": "$5783", "product_type": "Camera", "brand": "Sony"}, {"product_id": "P103", "product_category": "Grocery", "price": "$6780"}]}
+{"event_id": "U5699", "event_type": "add_to_cart", "timestamp": 1751312290.478805, "products": [{"product_id": "P609", "product_category": "Home", "price": "$1091"}, {"product_id": "P985", "product_category": "Home", "price": "$5699"}]}
+{"event_id": "U5882", "event_type": "logout", "timestamp": 1751312291.487118}
+{"event_id": "U5960", "event_type": "purchase", "timestamp": 1751312292.4939148, "products": [{"product_id": "P788", "product_category": "Toys", "price": "$1333"}]}
+{"event_id": "U2518", "event_type": "login", "timestamp": 1751312293.496894}
+{"event_id": "U5933", "event_type": "search", "timestamp": 1751312294.501767, "products": [{"product_id": "P972", "product_category": "Electronics", "price": "$2626", "product_type": "Laptop", "brand": "Sony"}, {"product_id": "P118", "product_category": "Sports and Fitness", "price": "$6301"}, {"product_id": "P402", "product_category": "Sports and Fitness", "price": "$8262"}]}
+{"event_id": "U2344", "event_type": "logout", "timestamp": 1751312295.508678}
+{"event_id": "U6169", "event_type": "logout", "timestamp": 1751312296.512872}
+{"event_id": "U4680", "event_type": "purchase", "timestamp": 1751312297.5185401, "products": [{"product_id": "P350", "product_category": "Grocery", "price": "$1692"}]}
+{"event_id": "U1898", "event_type": "logout", "timestamp": 1751312298.522826}
+{"event_id": "U3182", "event_type": "purchase", "timestamp": 1751312299.528969, "products": [{"product_id": "P984", "product_category": "Sports and Fitness", "price": "$7088"}]}
+{"event_id": "U7056", "event_type": "login", "timestamp": 1751312300.5364149}
+{"event_id": "U1812", "event_type": "search", "timestamp": 1751312301.5433679, "products": [{"product_id": "P103", "product_category": "Fashion", "price": "$9104", "product_type": "Shirt", "brand": "Puma"}, {"product_id": "P554", "product_category": "Furniture", "price": "$5631"}, {"product_id": "P974", "product_category": "Furniture", "price": "$5674"}]}
+{"event_id": "U7784", "event_type": "add_to_cart", "timestamp": 1751312302.550074, "products": [{"product_id": "P477", "product_category": "Grocery", "price": "$6952"}, {"product_id": "P351", "product_category": "Furniture", "price": "$1711"}, {"product_id": "P486", "product_category": "Home", "price": "$1147"}]}
+{"event_id": "U7961", "event_type": "purchase", "timestamp": 1751312303.557315, "products": [{"product_id": "P103", "product_category": "Furniture", "price": "$8902"}]}
+{"event_id": "U2322", "event_type": "purchase", "timestamp": 1751312304.5654862, "products": [{"product_id": "P378", "product_category": "Beauty", "price": "$1338"}, {"product_id": "P313", "product_category": "Furniture", "price": "$9675"}]}
+{"event_id": "U1071", "event_type": "search", "timestamp": 1751312305.5714822, "products": [{"product_id": "P224", "product_category": "Books", "price": "$7051"}]}
+{"event_id": "U5154", "event_type": "search", "timestamp": 1751312306.5766242, "products": [{"product_id": "P797", "product_category": "Home", "price": "$5195"}, {"product_id": "P545", "product_category": "Electronics", "price": "$7732", "product_type": "Laptop", "brand": "Apple"}]}
+{"event_id": "U8254", "event_type": "search", "timestamp": 1751312307.5864372, "products": [{"product_id": "P170", "product_category": "Furniture", "price": "$5984"}]}
+{"event_id": "U6334", "event_type": "purchase", "timestamp": 1751312308.595152, "products": [{"product_id": "P287", "product_category": "Electronics", "price": "$5198", "product_type": "Camera", "brand": "Samsung"}]}
+{"event_id": "U2121", "event_type": "search", "timestamp": 1751312309.599863, "products": [{"product_id": "P881", "product_category": "Fashion", "price": "$1986", "product_type": "Dress", "brand": "Zara"}]}
+{"event_id": "U3826", "event_type": "login", "timestamp": 1751312310.6080089}
+{"event_id": "U2627", "event_type": "add_to_cart", "timestamp": 1751312311.6211772, "products": [{"product_id": "P168", "product_category": "Books", "price": "$6018"}]}
+{"event_id": "U5454", "event_type": "view_product", "timestamp": 1751312312.628086, "products": [{"product_id": "P405", "product_category": "Grocery", "price": "$1764"}, {"product_id": "P442", "product_category": "Electronics", "price": "$9230", "product_type": "Camera", "brand": "Apple"}, {"product_id": "P626", "product_category": "Grocery", "price": "$5888"}]}
+{"event_id": "U9876", "event_type": "login", "timestamp": 1751312313.632457}
+{"event_id": "U7644", "event_type": "search", "timestamp": 1751312314.642407, "products": [{"product_id": "P199", "product_category": "Books", "price": "$622"}, {"product_id": "P403", "product_category": "Beauty", "price": "$7948"}, {"product_id": "P955", "product_category": "Home", "price": "$1776"}]}
+{"event_id": "U7754", "event_type": "logout", "timestamp": 1751312315.6550379}
+{"event_id": "U2847", "event_type": "purchase", "timestamp": 1751312316.6589592, "products": [{"product_id": "P982", "product_category": "Furniture", "price": "$5490"}, {"product_id": "P108", "product_category": "Beauty", "price": "$8741"}, {"product_id": "P459", "product_category": "Home", "price": "$5368"}]}
+{"event_id": "U1403", "event_type": "add_to_cart", "timestamp": 1751312317.666398, "products": [{"product_id": "P346", "product_category": "Sports and Fitness", "price": "$4279"}]}
+{"event_id": "U1852", "event_type": "logout", "timestamp": 1751312318.670951}
+{"event_id": "U6185", "event_type": "view_product", "timestamp": 1751312319.676851, "products": [{"product_id": "P979", "product_category": "Grocery", "price": "$4047"}]}
+{"event_id": "U1711", "event_type": "purchase", "timestamp": 1751312320.6801631, "products": [{"product_id": "P382", "product_category": "Toys", "price": "$7367"}]}
+{"event_id": "U3852", "event_type": "login", "timestamp": 1751312321.685588}
+{"event_id": "U2729", "event_type": "view_product", "timestamp": 1751312322.6908002, "products": [{"product_id": "P203", "product_category": "Electronics", "price": "$8023", "product_type": "Laptop", "brand": "Samsung"}, {"product_id": "P781", "product_category": "Grocery", "price": "$7203"}]}
+{"event_id": "U8015", "event_type": "search", "timestamp": 1751312323.697221, "products": [{"product_id": "P326", "product_category": "Toys", "price": "$7058"}, {"product_id": "P134", "product_category": "Beauty", "price": "$7666"}, {"product_id": "P916", "product_category": "Furniture", "price": "$7226"}]}
