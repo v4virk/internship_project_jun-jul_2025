@@ -7,17 +7,17 @@ import json
 import webbrowser
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout,
-    QPushButton, QTextEdit, QMenu, QToolButton, QLabel, QFrame
+    QPushButton, QTextEdit, QLabel, QFrame
 )
-from PyQt5.QtCore import Qt, QTimer, QFileSystemWatcher, QThread, pyqtSignal, QEvent
-from PyQt5.QtGui import QFont, QMovie # Added QFont, QMovie for animation
-
+from PyQt5.QtCore import Qt, QTimer, QFileSystemWatcher, QEvent, pyqtSignal
+from PyQt5.QtGui import QFont, QMovie
 
 # Virtual environment configuration
 VENV_PATH = "/Users/harvijaysingh/pyspark-env"
 VENV_ACTIVATE = f"{VENV_PATH}/bin/activate"
 
 # === Custom Event for Thread-Safe Text Appending ===
+# This class allows safe updating of the QTextEdit from non-GUI threads.
 class AppendTextEvent(QEvent):
     EVENT_TYPE = QEvent.Type(QEvent.registerEventType())
     def __init__(self, text):
@@ -31,12 +31,16 @@ class LogTextEdit(QTextEdit):
             return True
         return super().event(event)
 
-# === Loading Screen Class (from forntendlatest.py) ===
+# === Loading Screen Class ===
+# This class displays a message and the "Snake.gif" animation.
 class LoadingScreen(QWidget):
     def __init__(self, message="Loading..."):
         super().__init__()
-        self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint)
+        # Set window flags for a dialog-like, frameless window that stays on top
+        self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setFixedSize(300, 150)
+        self.setWindowTitle("Loading...") # Set a title for the window manager (optional, but good practice)
+        self.setWindowModality(Qt.ApplicationModal) # Makes it block interaction with other windows
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
@@ -47,19 +51,31 @@ class LoadingScreen(QWidget):
 
         self.spinner = QLabel()
         self.spinner.setAlignment(Qt.AlignCenter)
-        movie = QMovie("Snake.gif") # Assumes Snake.gif is in the same directory
+        movie = QMovie("Snake.gif") # Assumes Snake.gif is in the same directory as the script
         self.spinner.setMovie(movie)
-        movie.start()
+        movie.start() # Start the GIF animation
 
         layout.addWidget(self.spinner)
         layout.addSpacing(10)
         layout.addWidget(self.label)
         self.setLayout(layout)
 
-        self.setStyleSheet("background-color: white; color: black;")
+        # Style for the loading screen
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #2c2c2c; /* Dark background */
+                color: #eee; /* Light text color */
+                border: 2px solid #00BFFF; /* Blue border */
+                border-radius: 10px;
+            }
+            QLabel {
+                color: #00BFFF; /* Blue text */
+                font-weight: bold;
+            }
+        """)
 
-
-# === Child Windows ===
+# === Child Windows (Placeholders) ===
+# These classes are for the windows opened from the sidebar.
 class FileMonitoringWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -156,7 +172,6 @@ class FileMonitoringWindow(QWidget):
         self.timer.stop()
         super().closeEvent(event)
 
-# Placeholder classes for other windows
 class AnalyticsWindow(QWidget):
     def __init__(self):
         super().__init__()
@@ -234,17 +249,21 @@ class MainWindow(QWidget):
                 border-right: 1px solid #444;
             }
             /* Unified style for all sidebar buttons */
-            QPushButton.sidebar_item { 
+                           
+            QPushButton[class="sidebar_item"] {
                 background-color: transparent;
                 color: #bbb;
-                border: none;
-                padding: 10px 15px;
+                border-left: 4px solid transparent;
+                padding: 12px 10px;
                 font-size: 16px;
                 text-align: left;
+                font-weight: 500;
+                font-family: "Segoe UI", sans-serif;
             }
-            QPushButton.sidebar_item:hover {
-                background-color: #3a3a3a;
-                color: white;
+            QPushButton[class="sidebar_item"]:hover {
+                background-color: #2e2e2e;
+                color: #00BFFF;
+                border-left: 4px solid #00BFFF;
             }
         """)
 
@@ -265,38 +284,38 @@ class MainWindow(QWidget):
         sidebar_layout.setSpacing(15)
         sidebar_frame.setFixedWidth(200) # Fixed width for sidebar
 
-        # Add "Controls" label/button
-        controls_label = QLabel("Controls") # This remains a label based on the sketch
+        # Add "Controls" label (as a heading, not a button)
+        controls_label = QLabel("Controls")
         controls_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #eee; padding-left: 5px;")
         sidebar_layout.addWidget(controls_label)
         
-        # System Logs (Now a button)
+        # System Logs (Now a QPushButton)
         self.sys_logs_btn = QPushButton("System logs")
-        self.sys_logs_btn.setObjectName("sidebar_item")
+        self.sys_logs_btn.setProperty("class", "sidebar_item") 
         self.sys_logs_btn.clicked.connect(self.open_system_logs_window)
         sidebar_layout.addWidget(self.sys_logs_btn)
 
         # Analytics (from existing open_analytics_window)
         self.analytics_btn = QPushButton("Analytics")
-        self.analytics_btn.setObjectName("sidebar_item") 
+        self.analytics_btn.setProperty("class", "sidebar_item")
         self.analytics_btn.clicked.connect(self.open_analytics_window)
         sidebar_layout.addWidget(self.analytics_btn)
 
         # File Monitor (from existing open_monitor_window)
         self.file_monitor_btn = QPushButton("File monitor")
-        self.file_monitor_btn.setObjectName("sidebar_item") 
+        self.file_monitor_btn.setProperty("class", "sidebar_item") # Apply unified style
         self.file_monitor_btn.clicked.connect(self.open_monitor_window)
         sidebar_layout.addWidget(self.file_monitor_btn)
         
-        # System (placeholder, can link to system monitoring)
+        # System (can link to system monitoring)
         self.system_btn = QPushButton("System")
-        self.system_btn.setObjectName("sidebar_item")
+        self.system_btn.setProperty("class", "sidebar_item") # Apply unified style
         self.system_btn.clicked.connect(self.open_system_monitoring) 
         sidebar_layout.addWidget(self.system_btn)
 
-        # Ports (Now a button)
+        # Ports (Now a QPushButton)
         self.ports_btn = QPushButton("Ports")
-        self.ports_btn.setObjectName("sidebar_item")
+        self.ports_btn.setProperty("class", "sidebar_item") # Apply unified style
         self.ports_btn.clicked.connect(self.open_ports_window)
         sidebar_layout.addWidget(self.ports_btn)
         
@@ -376,7 +395,7 @@ class MainWindow(QWidget):
             return False
 
     def log(self, message):
-        # Ensure thread safety for UI updates
+        # Ensure thread safety for UI updates by posting an event to the main thread
         QApplication.instance().postEvent(self.log_output, AppendTextEvent(f"[DEBUG] {message}"))
 
     def read_process_output(self, process, session_name):
@@ -404,8 +423,7 @@ class MainWindow(QWidget):
                 f.write("read -p 'Press Enter to close this terminal...'\n")
             os.chmod(script_path, 0o755)
             
-            # Use osascript to open a new Terminal window and run the script
-            # Note: This is macOS specific. For other OS, you'd need different commands.
+            # Use osascript to open a new Terminal window and run the script (macOS specific)
             proc = subprocess.Popen(
                 ["osascript", "-e", f'tell app "Terminal" to do script "bash {script_path}"'],
                 stdout=subprocess.PIPE, 
@@ -426,33 +444,40 @@ class MainWindow(QWidget):
             return None
 
     def start_sessions(self):
-        producer_running = False
-        consumer_running = False
-        
-        try:
-            ps_output = subprocess.check_output(["ps", "-ax"]).decode('utf-8')
-            producer_running = any('generated_events.py' in line and 'python' in line for line in ps_output.split('\n'))
-            consumer_running = any('spark_kafka_to_hdfs.py' in line and ('python' in line or 'spark-submit' in line) for line in ps_output.split('\n'))
-        except Exception as e:
-            self.log(f"Error checking running processes: {str(e)}")
-        
-        if producer_running or consumer_running:
-            self.log("Warning: Producer or Consumer processes already running.")
-            return
+        # --- Show Loading Screen for Daemon/Process Startup ---
+        loading_daemons = LoadingScreen("Starting essential services...")
+        loading_daemons.show()
+        # Process events to ensure the loading screen appears immediately and animates
+        QApplication.processEvents()
 
         try:
+            producer_running = False
+            consumer_running = False
+            
+            try:
+                # Check if producer or consumer are already running
+                ps_output = subprocess.check_output(["ps", "-ax"]).decode('utf-8')
+                producer_running = any('generated_events.py' in line and 'python' in line for line in ps_output.split('\n'))
+                consumer_running = any('spark_kafka_to_hdfs.py' in line and ('python' in line or 'spark-submit' in line) for line in ps_output.split('\n'))
+            except Exception as e:
+                self.log(f"Error checking running processes: {str(e)}")
+            
+            if producer_running or consumer_running:
+                self.log("Warning: Producer or Consumer processes already running. Skipping startup.")
+                return # Exit early if already running
+
             if not self.check_virtualenv():
                 self.log("Cannot start sessions - virtual environment not configured properly")
-                return
+                return # Exit early if virtualenv check fails
 
-            # Initial jps check
+            # Initial jps check to see what's already running
             jps_proc = subprocess.Popen(["jps"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, bufsize=1)
             jps_output, _ = jps_proc.communicate()
             self.log(f"Current jps output:\n{jps_output}")
 
             running_daemons = {
                 "Kafka": "Kafka" in jps_output,
-                "QuorumPeerMain": "QuorumPeerMain" in jps_output,
+                "QuorumPeerMain": "QuorumPeerMain" in jps_output, # Zookeeper
                 "NodeManager": "NodeManager" in jps_output,
                 "ResourceManager": "ResourceManager" in jps_output,
                 "NameNode": "NameNode" in jps_output,
@@ -462,12 +487,13 @@ class MainWindow(QWidget):
             }
             self.log(f"Currently running daemons: {running_daemons}")
 
-            if not self.services_running:
-                terminal_number = 1
+            if not self.services_running: # Only start if not already marked as running by the app
+                terminal_number = 1 # Counter for terminal scripts
                 
+                # Start services if they are not already running
                 if not running_daemons["Kafka"]:
                     self.execute_in_terminal("spenv; brew services start kafka", terminal_number, "Kafka Service")
-                    time.sleep(15)
+                    time.sleep(15) # Give Kafka time to start
                     terminal_number += 1
 
                 if not any(running_daemons[key] for key in ["NameNode", "DataNode", "SecondaryNameNode"]):
@@ -482,10 +508,11 @@ class MainWindow(QWidget):
 
                 if not running_daemons["NodeManager"]:
                     self.execute_in_terminal("spenv; yarn-daemon.sh start nodemanager", terminal_number, "NodeManager")
-                    time.sleep(15)
+                    time.sleep(15) # Give NodeManager time
                     terminal_number += 1
 
                 if not running_daemons["QuorumPeerMain"]:
+                    # Note: Hardcoded path to Kafka Zookeeper for 3.9.0 - adjust if your Kafka version differs
                     self.execute_in_terminal(
                         "spenv; /opt/homebrew/Cellar/kafka/3.9.0/libexec/bin/zookeeper-server-start.sh /opt/homebrew/etc/kafka/zookeeper.properties",
                         terminal_number, "Zookeeper"
@@ -494,6 +521,7 @@ class MainWindow(QWidget):
                     terminal_number += 1
 
                 if not running_daemons["ConsoleConsumer"]:
+                    # Note: Hardcoded path to Kafka Console Consumer for 3.9.0 - adjust if your Kafka version differs
                     self.execute_in_terminal(
                         "spenv; /opt/homebrew/Cellar/kafka/3.9.0/libexec/bin/kafka-console-consumer.sh --topic test-events --bootstrap-server localhost:9092 --from-beginning",
                         terminal_number, "Kafka Console Consumer"
@@ -501,7 +529,7 @@ class MainWindow(QWidget):
                     time.sleep(5)
                     terminal_number += 1
 
-                self.services_running = True
+                self.services_running = True # Mark services as started by the app
 
             # Start Producer
             producer_path = "/Users/harvijaysingh/btech cse/3rd year/internship/udated/generated_events.py"
@@ -589,6 +617,9 @@ class MainWindow(QWidget):
 
         except Exception as e:
             self.log(f"Unexpected error in start_sessions: {str(e)}")
+        finally:
+            # --- Close Loading Screen for Daemon/Process Startup ---
+            loading_daemons.close()
 
     def stop_sessions(self):
         self.log("Stop pressed. Terminating producer and consumer...")
@@ -623,32 +654,6 @@ class MainWindow(QWidget):
                 terminated = True
             except Exception as e:
                 self.log(f"Error terminating Spark processes: {str(e)}")
-            
-            # Clear terminal processes (specific to how they are added)
-            # This part needs to be more robust, as currently it assumes fixed indices which is brittle.
-            # A better approach would be to store Popen objects in a dictionary keyed by session name.
-            if len(self.terminal_processes) > 8: # Assuming producer is at index 8 if 1-based terminals were opened up to 8
-                try:
-                    # Attempt to gracefully terminate first
-                    self.terminal_processes[8].terminate() 
-                    time.sleep(1) # Give it a moment
-                    if self.terminal_processes[8].poll() is None: # If still running, kill
-                        self.terminal_processes[8].kill()
-                    self.log("Terminated producer terminal")
-                    terminated = True
-                except Exception as e:
-                    self.log(f"Error terminating producer terminal: {str(e)}")
-            
-            if len(self.terminal_processes) > 9: # Assuming consumer is at index 9
-                try:
-                    self.terminal_processes[9].terminate()
-                    time.sleep(1)
-                    if self.terminal_processes[9].poll() is None:
-                        self.terminal_processes[9].kill()
-                    self.log("Terminated consumer terminal")
-                    terminated = True
-                except Exception as e:
-                    self.log(f"Error terminating consumer terminal: {str(e)}")
             
             # This logic for trimming `terminal_processes` based on index is problematic
             # It's better to remove specific processes once they are confirmed terminated.
@@ -737,14 +742,22 @@ class MainWindow(QWidget):
     def _open_window_with_loading(self, window_class, attr_name, message):
         loading = LoadingScreen(message)
         loading.show()
-        QTimer.singleShot(2000, lambda: self._show_window(window_class, attr_name, loading))
+        # Use singleShot(0) to allow the loading screen to draw before the actual window creation
+        QTimer.singleShot(0, lambda: self._show_window(window_class, attr_name, loading))
 
     def _show_window(self, window_class, attr_name, loading_widget):
         loading_widget.close()
-        window = window_class()
-        setattr(self, attr_name, window)
-        window.show()
-        self.log(f"Opened {window.windowTitle()}.")
+        # Check if the window instance already exists before creating a new one
+        existing_window = getattr(self, attr_name)
+        if existing_window is None or not existing_window.isVisible():
+            window = window_class()
+            setattr(self, attr_name, window)
+            window.show()
+            self.log(f"Opened {window.windowTitle()}.")
+        else:
+            existing_window.activateWindow() # Bring existing window to front
+            existing_window.raise_()
+            self.log(f"{existing_window.windowTitle()} is already open.")
 
     # === Modified/New Window Opening Functions ===
     def open_analytics_window(self):
@@ -821,43 +834,10 @@ class MainWindow(QWidget):
         # New function for Ports button
         self._open_window_with_loading(PortsWindow, 'ports_window', "Checking ports...")
 
-# === Startup Animation with Spinner (from forntendlatest.py) ===
+# === Main application entry point ===
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-
-    startup_loading = QWidget()
-    startup_loading.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
-    startup_loading.resize(1200, 700) # Adjusted to main window size
-    startup_loading.setStyleSheet("background-color: white; color: black;")
-    startup_loading.setCursor(Qt.WaitCursor)
-
-    startup_layout = QVBoxLayout()
-
-    header_label = QLabel("Real-Time E-Commerce Monitoring System")
-    header_label.setFont(QFont("Segoe UI", 32, QFont.Bold))
-    header_label.setAlignment(Qt.AlignCenter)
-
-    spinner_label = QLabel()
-    spinner_movie = QMovie("Snake.gif") # Assumes Snake.gif is in the same directory
-    spinner_label.setMovie(spinner_movie)
-    spinner_label.setAlignment(Qt.AlignCenter)
-    spinner_movie.start()
-
-    startup_layout.addStretch()
-    startup_layout.addWidget(header_label)
-    startup_layout.addSpacing(20)
-    startup_layout.addWidget(spinner_label)
-    startup_layout.addStretch()
-
-    startup_loading.setLayout(startup_layout)
-    startup_loading.show()
-
-    # Show main window after delay
     window = MainWindow()
-    def show_main():
-        startup_loading.close()
-        window.show()
-
-    QTimer.singleShot(2000, show_main) # 2 second delay for startup animation
+    window.show() # Show main window immediately
 
     sys.exit(app.exec_())
