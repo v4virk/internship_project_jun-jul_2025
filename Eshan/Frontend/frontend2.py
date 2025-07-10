@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (
     QPushButton, QTextEdit, QLabel, QFrame
 )
 from PyQt5.QtCore import Qt, QTimer, QFileSystemWatcher, QEvent, pyqtSignal
-from PyQt5.QtGui import QFont, QMovie # QMovie is still imported but no longer used for LoadingScreen
+from PyQt5.QtGui import QFont, QMovie
 
 # Virtual environment configuration
 VENV_PATH = "/Users/harvijaysingh/pyspark-env"
@@ -32,35 +32,40 @@ class LogTextEdit(QTextEdit):
         return super().event(event)
 
 # === Loading Screen Class ===
-# This class displays a message without any animation and now no border.
+# This class displays a message and the "Snake.gif" animation.
 class LoadingScreen(QWidget):
-    def __init__(self, message="Processing..."): # Removed gif_path parameter and set default message
+    def __init__(self, message="Loading..."):
         super().__init__()
         # Set window flags for a dialog-like, frameless window that stays on top
         self.setWindowFlags(Qt.Dialog | Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
         self.setFixedSize(300, 150)
-        self.setWindowTitle("Processing...") # Set a title for the window manager
+        self.setWindowTitle("Loading...") # Set a title for the window manager (optional, but good practice)
         self.setWindowModality(Qt.ApplicationModal) # Makes it block interaction with other windows
 
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
 
-        self.label = QLabel(message) # Only use this label for the message
+        self.label = QLabel(message)
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setFont(QFont("Segoe UI", 14))
 
-        # REMOVED: self.spinner and QMovie related code
+        self.spinner = QLabel()
+        self.spinner.setAlignment(Qt.AlignCenter)
+        movie = QMovie("Snake.gif") # Assumes Snake.gif is in the same directory as the script
+        self.spinner.setMovie(movie)
+        movie.start() # Start the GIF animation
 
-        # Only add the label to the layout
+        layout.addWidget(self.spinner)
+        layout.addSpacing(10)
         layout.addWidget(self.label)
         self.setLayout(layout)
 
-        # Style for the loading screen - Removed the border
+        # Style for the loading screen
         self.setStyleSheet("""
             QWidget {
                 background-color: #2c2c2c; /* Dark background */
                 color: #eee; /* Light text color */
-                /* border: 2px solid #00BFFF; Removed border */
+                border: none; /* Remove border */
                 border-radius: 10px;
             }
             QLabel {
@@ -71,7 +76,59 @@ class LoadingScreen(QWidget):
 
 # === Child Windows (Placeholders) ===
 # These classes are for the windows opened from the sidebar.
-
+class FileMonitoringWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("File Monitoring")
+        self.resize(800, 600)
+        
+        self.file_path = "/Users/harvijaysingh/events_log.json"
+        
+        self.text_edit = QTextEdit()
+        self.text_edit.setReadOnly(True)
+        self.text_edit.setStyleSheet("""
+            font-family: monospace; 
+            font-size: 12px;
+            background-color: #333; /* Dark background for console */
+            color: #eee; /* Light text color */
+            border: 1px solid #555;
+        """)
+        
+        self.refresh_btn = QPushButton("Manual Refresh")
+        self.refresh_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #505050;
+                color: white;
+                border: 1px solid #666;
+                padding: 8px 15px;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #606060;
+            }
+        """)
+        self.refresh_btn.clicked.connect(self.update_file_content)
+        
+        layout = QVBoxLayout()
+        layout.addWidget(self.text_edit)
+        
+        button_layout = QHBoxLayout()
+        button_layout.addWidget(self.refresh_btn)
+        button_layout.addStretch()
+        layout.addLayout(button_layout)
+        
+        self.setLayout(layout)
+        
+        self.file_watcher = QFileSystemWatcher()
+        if os.path.exists(self.file_path):
+            self.file_watcher.addPath(self.file_path)
+        self.file_watcher.fileChanged.connect(self.update_file_content)
+        
+        self.update_file_content()
+        
+        self.timer = QTimer()
+        self.timer.timeout.connect(self.update_file_content)
+        self.timer.start(1000)
 
     def update_file_content(self):
         try:
@@ -148,8 +205,7 @@ class MainWindow(QWidget):
         super().__init__()
         self.setWindowTitle("near real time e-com website analytics")
         self.resize(2000, 1000) # Adjusted size for better fit
-        self.stored_logs = []
-        self.logging_enabled = False
+        
         # Apply dark theme stylesheet
         self.setStyleSheet("""
             QWidget {
@@ -182,14 +238,14 @@ class MainWindow(QWidget):
             }
             QTextEdit {
                 background-color: #333; /* Dark background for console */
-                color: #00FF00; /* Green text for console output */
+                color: #FFFFFF; /* White text for console output */
                 border: 1px solid #555;
                 padding: 10px;
                 font-family: "Courier New", Courier, monospace;
                 font-size: 14px;
             }
             QFrame#sidebar {
-                background-color: transparent; /* Slightly lighter dark for sidebar */
+                background-color: #2c2c2c; /* Slightly lighter dark for sidebar */
                 border-right: 1px solid #444;
             }
             /* Unified style for all sidebar buttons */
@@ -230,15 +286,9 @@ class MainWindow(QWidget):
 
         # Add "Controls" label (as a heading, not a button)
         controls_label = QLabel("Controls")
-        controls_label.setStyleSheet("font-size: 20px; font-weight: bold; color: #eee; padding-left: 5px;")
+        controls_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #eee; padding-left: 5px;")
         sidebar_layout.addWidget(controls_label)
         
-        # System Logs (Now a QPushButton)
-        self.sys_logs_btn = QPushButton("System logs")
-        self.sys_logs_btn.setProperty("class", "sidebar_item") 
-        self.sys_logs_btn.clicked.connect(self.open_system_logs_window)     
-        sidebar_layout.addWidget(self.sys_logs_btn)
-
         # Analytics (from existing open_analytics_window)
         self.analytics_btn = QPushButton("Analytics")
         self.analytics_btn.setProperty("class", "sidebar_item")
@@ -248,7 +298,7 @@ class MainWindow(QWidget):
         # File Monitor (from existing open_monitor_window)
         self.file_monitor_btn = QPushButton("File monitor")
         self.file_monitor_btn.setProperty("class", "sidebar_item") # Apply unified style
-        self.file_monitor_btn.clicked.connect(self.open_file_monitor_in_console)
+        self.file_monitor_btn.clicked.connect(self.open_monitor_window)
         sidebar_layout.addWidget(self.file_monitor_btn)
         
         # System (can link to system monitoring)
@@ -314,7 +364,7 @@ class MainWindow(QWidget):
 
         # Child Window Instances (for re-use)
         self.analytics_window = None
-        #self.monitor_window = None
+        self.monitor_window = None
         self.system_logs_window = None
         self.ports_window = None
 
@@ -337,65 +387,19 @@ class MainWindow(QWidget):
         except Exception as e:
             self.log(f"Error checking virtualenv: {str(e)}")
             return False
-        
+
     def log(self, message):
-        formatted = f"[DEBUG] {message}"
-        self.stored_logs.append(formatted)  # Store the message
-
-        if self.logging_enabled:
-        # Only show in the console if logging is enabled (after System Logs is clicked)
-            QApplication.instance().postEvent(self.log_output, AppendTextEvent(formatted))
-
-    def open_system_logs_window(self): 
-        
-        self.log_output.clear()
-        for message in self.stored_logs:
-            QApplication.instance().postEvent(self.log_output, AppendTextEvent(message))
-        self.logging_enabled = True
-        self.log("[INFO] Displayed stored logs in console")
-    def open_file_monitor_in_console(self):
-        print("[DEBUG] File monitor method triggered")
-        file_path = "/Users/harvijaysingh/events_log.json"  # Or wherever your file is
-    
-        if not os.path.exists(file_path):
-            self.log(f"[File Monitor] File not found: {file_path}")
-            return
-
-        try:
-            with open(file_path, 'r') as f:
-             content = f.read().strip()
-
-            if not content:
-                self.log("[File Monitor] File is empty.")
-                return
-
-            try:
-                data = json.loads(content)
-                formatted = json.dumps(data, indent=2)
-                self.log_output.clear()
-                self.log("[File Monitor] Showing content of events_log.json:")
-                for line in formatted.splitlines():
-                    QApplication.instance().postEvent(self.log_output, AppendTextEvent(line))
-            except json.JSONDecodeError:
-                self.log("[File Monitor] File contains invalid JSON.")
-                self.log_output.clear()
-                for line in content.splitlines():
-                    QApplication.instance().postEvent(self.log_output, AppendTextEvent(line))
-
-        except Exception as e:
-            self.log(f"[File Monitor] Error reading file: {str(e)}")
-
+        # Ensure thread safety for UI updates by posting an event to the main thread
+        QApplication.instance().postEvent(self.log_output, AppendTextEvent(f"[DEBUG] {message}"))
 
     def read_process_output(self, process, session_name):
-            try:
-                for line in iter(process.stdout.readline, ''):
-                    if line:
-                        self.log(f"{session_name}: {line.strip()}")
-                process.stdout.close()
-
-            except Exception as e:
-                self.log(f"Error reading output for {session_name}: {e}")
-
+        try:
+            for line in iter(process.stdout.readline, ''):
+                if line:
+                    self.log(f"{session_name}: {line.strip()}")
+            process.stdout.close()
+        except Exception as e:
+            self.log(f"Error reading output for {session_name}: {e}")
 
     def execute_in_terminal(self, command, terminal_number, session_name):
         self.log(f"Starting Terminal {terminal_number} ({session_name}): {command}")
@@ -406,7 +410,7 @@ class MainWindow(QWidget):
                 f.write("#!/bin/bash\n")
                 f.write(f"{command}\n")
                 f.write("if [ $? -ne 0 ]; then\n")
-                f.write("    echo 'Error: " + command.replace("'", "'\\''") + " failed'\n") # Escape single quotes for shell
+                f.write(f"    echo 'Error: {command} failed'\n")
                 f.write("    read -p 'Press Enter to close this terminal...'\n")
                 f.write("    exit 1\n")
                 f.write("fi\n")
@@ -435,7 +439,7 @@ class MainWindow(QWidget):
 
     def start_sessions(self):
         # --- Show Loading Screen for Daemon/Process Startup ---
-        loading_daemons = LoadingScreen("Starting essential services...") # Removed gif_path
+        loading_daemons = LoadingScreen("Starting essential services...")
         loading_daemons.show()
         # Process events to ensure the loading screen appears immediately and animates
         QApplication.processEvents()
@@ -659,86 +663,74 @@ class MainWindow(QWidget):
             self.log(f"Error during stop operation: {str(e)}")
 
     def terminate_sessions(self):
-        # --- Show Loading Screen for Termination ---
-        loading_termination = LoadingScreen("Terminating all services...") # Removed gif_path
-        loading_termination.show()
-        QApplication.processEvents() # Ensure the loading screen appears immediately and animates
-
+        self.log("Terminating all sessions and services...")
+        
+        # Terminate all managed processes
+        for proc in self.processes + self.terminal_processes:
+            try:
+                if proc.poll() is None: # Only try to terminate if still running
+                    proc.terminate()
+                    time.sleep(0.5) # Give it a moment to terminate
+                    if proc.poll() is None:
+                        proc.kill()
+            except Exception as e:
+                self.log(f"Error terminating a managed process: {str(e)}")
+        
+        self.processes = []
+        self.terminal_processes = []
+        self.services_running = False
+        
+        # Stop HDFS services
         try:
-            self.log("Terminating all sessions and services...")
-            
-            # Terminate all managed processes
-            for proc in self.processes + self.terminal_processes:
-                try:
-                    if proc.poll() is None: # Only try to terminate if still running
-                        proc.terminate()
-                        time.sleep(0.5) # Give it a moment to terminate
-                        if proc.poll() is None:
-                            proc.kill()
-                except Exception as e:
-                    self.log(f"Error terminating a managed process: {str(e)}")
-            
-            self.processes = []
-            self.terminal_processes = []
-            self.services_running = False
-            
-            # Stop HDFS services
-            try:
-                self.log("\nStopping HDFS services...")
-                subprocess.run(["stop-dfs.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                self.log("HDFS services stopped")
-            except subprocess.CalledProcessError as e:
-                self.log(f"Error stopping HDFS: {e.stdout.decode() + e.stderr.decode()}")
-            except Exception as e:
-                self.log(f"Unexpected error stopping HDFS: {str(e)}")
-            
-            # Stop YARN services
-            try:
-                self.log("Stopping YARN services...")
-                subprocess.run(["stop-yarn.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                self.log("YARN services stopped")
-            except subprocess.CalledProcessError as e:
-                self.log(f"Error stopping YARN: {e.stdout.decode() + e.stderr.decode()}")
-            except Exception as e:
-                self.log(f"Unexpected error stopping YARN: {str(e)}")
-            
-            # Stop Kafka service (using brew services stop)
-            try:
-                self.log("Stopping Kafka service...")
-                subprocess.run(["brew", "services", "stop", "kafka"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                self.log("Kafka service stopped")
-            except subprocess.CalledProcessError as e:
-                self.log(f"Error stopping Kafka: {e.stdout.decode() + e.stderr.decode()}")
-            except Exception as e:
-                self.log(f"Unexpected error stopping Kafka: {str(e)}")
-            
-            # Aggressive cleanup for any remaining processes
-            try:
-                self.log("Cleaning up remaining processes...")
-                subprocess.run(["pkill", "-f", "generated_events.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                subprocess.run(["pkill", "-f", "spark_kafka_to_hdfs.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                subprocess.run(["pkill", "-f", "terminal_script_"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                subprocess.run(["pkill", "-f", "kafka"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                subprocess.run(["pkill", "-f", "zookeeper"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                subprocess.run(["pkill", "-f", "streamlit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                subprocess.run(["pkill", "-f", "spark-submit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                self.log("Remaining processes cleaned up")
-            except Exception as e:
-                self.log(f"Cleanup error: {str(e)}")
-            
-            try:
-                jps_output = subprocess.check_output(["jps"]).decode('utf-8')
-                self.log(f"Final jps output:\n{jps_output}")
-            except Exception as e:
-                self.log(f"Could not verify running processes with jps: {str(e)}")
-            
-            self.log("All processes and services terminated.")
-
+            self.log("\nStopping HDFS services...")
+            subprocess.run(["stop-dfs.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.log("HDFS services stopped")
+        except subprocess.CalledProcessError as e:
+            self.log(f"Error stopping HDFS: {e.stdout.decode() + e.stderr.decode()}")
         except Exception as e:
-            self.log(f"Unexpected error in terminate_sessions: {str(e)}")
-        finally:
-            # --- Close Loading Screen for Termination ---
-            loading_termination.close()
+            self.log(f"Unexpected error stopping HDFS: {str(e)}")
+        
+        # Stop YARN services
+        try:
+            self.log("Stopping YARN services...")
+            subprocess.run(["stop-yarn.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.log("YARN services stopped")
+        except subprocess.CalledProcessError as e:
+            self.log(f"Error stopping YARN: {e.stdout.decode() + e.stderr.decode()}")
+        except Exception as e:
+            self.log(f"Unexpected error stopping YARN: {str(e)}")
+        
+        # Stop Kafka service (using brew services stop)
+        try:
+            self.log("Stopping Kafka service...")
+            subprocess.run(["brew", "services", "stop", "kafka"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.log("Kafka service stopped")
+        except subprocess.CalledProcessError as e:
+            self.log(f"Error stopping Kafka: {e.stdout.decode() + e.stderr.decode()}")
+        except Exception as e:
+            self.log(f"Unexpected error stopping Kafka: {str(e)}")
+        
+        # Aggressive cleanup for any remaining processes
+        try:
+            self.log("Cleaning up remaining processes...")
+            subprocess.run(["pkill", "-f", "generated_events.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.run(["pkill", "-f", "spark_kafka_to_hdfs.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.run(["pkill", "-f", "terminal_script_"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.run(["pkill", "-f", "kafka"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.run(["pkill", "-f", "zookeeper"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.run(["pkill", "-f", "streamlit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            subprocess.run(["pkill", "-f", "spark-submit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.log("Remaining processes cleaned up")
+        except Exception as e:
+            self.log(f"Cleanup error: {str(e)}")
+        
+        try:
+            jps_output = subprocess.check_output(["jps"]).decode('utf-8')
+            self.log(f"Final jps output:\n{jps_output}")
+        except Exception as e:
+            self.log(f"Could not verify running processes with jps: {str(e)}")
+        
+        self.log("All processes and services terminated.")
 
     # === Helper to open windows with loading animation ===
     def _open_window_with_loading(self, window_class, attr_name, message):
@@ -816,6 +808,10 @@ class MainWindow(QWidget):
             self.log(f"Error setting up Streamlit analytics: {str(e)}")
 
 
+    def open_monitor_window(self):
+        # Now uses the loading animation helper
+        self._open_window_with_loading(FileMonitoringWindow, 'monitor_window', "Starting file monitor...")
+
     def open_system_monitoring(self):
         try:
             url = "https://us5.datadoghq.com/dashboard/gmb-csm-j6n/system-metrics?fromUser=false&refresh_mode=sliding&from_ts=1752079993453&to_ts=1752083593453&live=true"
@@ -824,6 +820,9 @@ class MainWindow(QWidget):
         except Exception as e:
             self.log(f"Error opening System Monitoring: {str(e)}")
 
+    def open_system_logs_window(self):
+        # New function for System Logs button
+        self._open_window_with_loading(SystemLogsWindow, 'system_logs_window', "Loading system logs...")
 
     def open_ports_window(self):
         # New function for Ports button
