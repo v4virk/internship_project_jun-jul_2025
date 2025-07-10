@@ -49,15 +49,16 @@ class LoadingScreen(QWidget):
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setFont(QFont("Segoe UI", 14))
 
-        self.spinner = QLabel()
-        self.spinner.setAlignment(Qt.AlignCenter)
-        movie = QMovie("Snake.gif") # Assumes Snake.gif is in the same directory as the script
-        self.spinner.setMovie(movie)
-        movie.start() # Start the GIF animation
+        # Removed the spinner (GIF animation) related code as requested.
+        # self.spinner = QLabel()
+        # self.spinner.setAlignment(Qt.AlignCenter)
+        # movie = QMovie("Snake.gif") # Assumes Snake.gif is in the same directory as the script
+        # self.spinner.setMovie(movie)
+        # movie.start() # Start the GIF animation
+        # layout.addWidget(self.spinner)
+        # layout.addSpacing(10) # Removed spacing since spinner is gone
 
-        layout.addWidget(self.spinner)
-        layout.addSpacing(10)
-        layout.addWidget(self.label)
+        layout.addWidget(self.label) # Only the message label remains
         self.setLayout(layout)
 
         # Style for the loading screen
@@ -65,7 +66,7 @@ class LoadingScreen(QWidget):
             QWidget {
                 background-color: #2c2c2c; /* Dark background */
                 color: #eee; /* Light text color */
-                border: none; /* Remove border */
+                border: none; /* Removed border */
                 border-radius: 10px;
             }
             QLabel {
@@ -203,7 +204,7 @@ class PortsWindow(QWidget):
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("near real time e-com website analytics")
+        self.setWindowTitle("Near Real-Time E-commerce Website Analytics")
         self.resize(2000, 1000) # Adjusted size for better fit
         
         # Apply dark theme stylesheet
@@ -238,7 +239,7 @@ class MainWindow(QWidget):
             }
             QTextEdit {
                 background-color: #333; /* Dark background for console */
-                color: #FFFFFF; /* White text for console output */
+                color: #FFFFFF; /* Green text for console output */
                 border: 1px solid #555;
                 padding: 10px;
                 font-family: "Courier New", Courier, monospace;
@@ -289,6 +290,12 @@ class MainWindow(QWidget):
         controls_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #eee; padding-left: 5px;")
         sidebar_layout.addWidget(controls_label)
         
+        # System Logs (Now a QPushButton)
+        self.sys_logs_btn = QPushButton("System logs")
+        self.sys_logs_btn.setProperty("class", "sidebar_item") 
+        self.sys_logs_btn.clicked.connect(self.open_system_logs_window)
+        sidebar_layout.addWidget(self.sys_logs_btn)
+
         # Analytics (from existing open_analytics_window)
         self.analytics_btn = QPushButton("Analytics")
         self.analytics_btn.setProperty("class", "sidebar_item")
@@ -440,6 +447,12 @@ class MainWindow(QWidget):
     def start_sessions(self):
         # --- Show Loading Screen for Daemon/Process Startup ---
         loading_daemons = LoadingScreen("Starting essential services...")
+        # Center the loading screen relative to the main window
+        main_rect = self.geometry()
+        loading_size = loading_daemons.size()
+        x = main_rect.x() + (main_rect.width() - loading_size.width()) // 2
+        y = main_rect.y() + (main_rect.height() - loading_size.height()) // 2
+        loading_daemons.move(x, y)
         loading_daemons.show()
         # Process events to ensure the loading screen appears immediately and animates
         QApplication.processEvents()
@@ -663,78 +676,103 @@ class MainWindow(QWidget):
             self.log(f"Error during stop operation: {str(e)}")
 
     def terminate_sessions(self):
-        self.log("Terminating all sessions and services...")
-        
-        # Terminate all managed processes
-        for proc in self.processes + self.terminal_processes:
+        # --- Show Loading Screen for Termination ---
+        loading_termination = LoadingScreen("Terminating all services...")
+        # Center the loading screen relative to the main window
+        main_rect = self.geometry()
+        loading_size = loading_termination.size()
+        x = main_rect.x() + (main_rect.width() - loading_size.width()) // 2
+        y = main_rect.y() + (main_rect.height() - loading_size.height()) // 2
+        loading_termination.move(x, y)
+        loading_termination.show()
+        QApplication.processEvents() # Ensure it appears immediately
+
+        try:
+            self.log("Terminating all sessions and services...")
+            
+            # Terminate all managed processes
+            for proc in self.processes + self.terminal_processes:
+                try:
+                    if proc.poll() is None: # Only try to terminate if still running
+                        proc.terminate()
+                        time.sleep(0.5) # Give it a moment to terminate
+                        if proc.poll() is None:
+                            proc.kill()
+                except Exception as e:
+                    self.log(f"Error terminating a managed process: {str(e)}")
+            
+            self.processes = []
+            self.terminal_processes = []
+            self.services_running = False
+            
+            # Stop HDFS services
             try:
-                if proc.poll() is None: # Only try to terminate if still running
-                    proc.terminate()
-                    time.sleep(0.5) # Give it a moment to terminate
-                    if proc.poll() is None:
-                        proc.kill()
+                self.log("\nStopping HDFS services...")
+                subprocess.run(["stop-dfs.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                self.log("HDFS services stopped")
+            except subprocess.CalledProcessError as e:
+                self.log(f"Error stopping HDFS: {e.stdout.decode() + e.stderr.decode()}")
             except Exception as e:
-                self.log(f"Error terminating a managed process: {str(e)}")
-        
-        self.processes = []
-        self.terminal_processes = []
-        self.services_running = False
-        
-        # Stop HDFS services
-        try:
-            self.log("\nStopping HDFS services...")
-            subprocess.run(["stop-dfs.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            self.log("HDFS services stopped")
-        except subprocess.CalledProcessError as e:
-            self.log(f"Error stopping HDFS: {e.stdout.decode() + e.stderr.decode()}")
+                self.log(f"Unexpected error stopping HDFS: {str(e)}")
+            
+            # Stop YARN services
+            try:
+                self.log("Stopping YARN services...")
+                subprocess.run(["stop-yarn.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                self.log("YARN services stopped")
+            except subprocess.CalledProcessError as e:
+                self.log(f"Error stopping YARN: {e.stdout.decode() + e.stderr.decode()}")
+            except Exception as e:
+                self.log(f"Unexpected error stopping YARN: {str(e)}")
+            
+            # Stop Kafka service (using brew services stop)
+            try:
+                self.log("Stopping Kafka service...")
+                subprocess.run(["brew", "services", "stop", "kafka"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                self.log("Kafka service stopped")
+            except subprocess.CalledProcessError as e:
+                self.log(f"Error stopping Kafka: {e.stdout.decode() + e.stderr.decode()}")
+            except Exception as e:
+                self.log(f"Unexpected error stopping Kafka: {str(e)}")
+            
+            # Aggressive cleanup for any remaining processes
+            try:
+                self.log("Cleaning up remaining processes...")
+                subprocess.run(["pkill", "-f", "generated_events.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["pkill", "-f", "spark_kafka_to_hdfs.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["pkill", "-f", "terminal_script_"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["pkill", "-f", "kafka"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["pkill", "-f", "zookeeper"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["pkill", "-f", "streamlit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                subprocess.run(["pkill", "-f", "spark-submit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                self.log("Remaining processes cleaned up")
+            except Exception as e:
+                self.log(f"Cleanup error: {str(e)}")
+            
+            try:
+                jps_output = subprocess.check_output(["jps"]).decode('utf-8')
+                self.log(f"Final jps output:\n{jps_output}")
+            except Exception as e:
+                self.log(f"Could not verify running processes with jps: {str(e)}")
+            
+            self.log("All processes and services terminated.")
+
         except Exception as e:
-            self.log(f"Unexpected error stopping HDFS: {str(e)}")
-        
-        # Stop YARN services
-        try:
-            self.log("Stopping YARN services...")
-            subprocess.run(["stop-yarn.sh"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            self.log("YARN services stopped")
-        except subprocess.CalledProcessError as e:
-            self.log(f"Error stopping YARN: {e.stdout.decode() + e.stderr.decode()}")
-        except Exception as e:
-            self.log(f"Unexpected error stopping YARN: {str(e)}")
-        
-        # Stop Kafka service (using brew services stop)
-        try:
-            self.log("Stopping Kafka service...")
-            subprocess.run(["brew", "services", "stop", "kafka"], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            self.log("Kafka service stopped")
-        except subprocess.CalledProcessError as e:
-            self.log(f"Error stopping Kafka: {e.stdout.decode() + e.stderr.decode()}")
-        except Exception as e:
-            self.log(f"Unexpected error stopping Kafka: {str(e)}")
-        
-        # Aggressive cleanup for any remaining processes
-        try:
-            self.log("Cleaning up remaining processes...")
-            subprocess.run(["pkill", "-f", "generated_events.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            subprocess.run(["pkill", "-f", "spark_kafka_to_hdfs.py"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            subprocess.run(["pkill", "-f", "terminal_script_"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            subprocess.run(["pkill", "-f", "kafka"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            subprocess.run(["pkill", "-f", "zookeeper"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            subprocess.run(["pkill", "-f", "streamlit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            subprocess.run(["pkill", "-f", "spark-submit"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            self.log("Remaining processes cleaned up")
-        except Exception as e:
-            self.log(f"Cleanup error: {str(e)}")
-        
-        try:
-            jps_output = subprocess.check_output(["jps"]).decode('utf-8')
-            self.log(f"Final jps output:\n{jps_output}")
-        except Exception as e:
-            self.log(f"Could not verify running processes with jps: {str(e)}")
-        
-        self.log("All processes and services terminated.")
+            self.log(f"Unexpected error in terminate_sessions: {str(e)}")
+        finally:
+            # --- Close Loading Screen for Termination ---
+            loading_termination.close()
 
     # === Helper to open windows with loading animation ===
     def _open_window_with_loading(self, window_class, attr_name, message):
         loading = LoadingScreen(message)
+        # Center the loading screen relative to the main window
+        main_rect = self.geometry()
+        loading_size = loading.size()
+        x = main_rect.x() + (main_rect.width() - loading_size.width()) // 2
+        y = main_rect.y() + (main_rect.height() - loading_size.height()) // 2
+        loading.move(x,y)
+        
         loading.show()
         # Use singleShot(0) to allow the loading screen to draw before the actual window creation
         QTimer.singleShot(0, lambda: self._show_window(window_class, attr_name, loading))
