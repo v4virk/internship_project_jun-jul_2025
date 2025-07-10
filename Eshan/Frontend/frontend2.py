@@ -239,7 +239,7 @@ class MainWindow(QWidget):
             }
             QTextEdit {
                 background-color: #333; /* Dark background for console */
-                color: #FFFFFF; /* Green text for console output */
+                color: #FFFFFF; /* White text for console output */
                 border: 1px solid #555;
                 padding: 10px;
                 font-family: "Courier New", Courier, monospace;
@@ -287,15 +287,9 @@ class MainWindow(QWidget):
 
         # Add "Controls" label (as a heading, not a button)
         controls_label = QLabel("Controls")
-        controls_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #eee; padding-left: 5px;")
+        controls_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #eee; padding-left: 5px; background-color: transparent;")
         sidebar_layout.addWidget(controls_label)
         
-        # System Logs (Now a QPushButton)
-        self.sys_logs_btn = QPushButton("System logs")
-        self.sys_logs_btn.setProperty("class", "sidebar_item") 
-        self.sys_logs_btn.clicked.connect(self.open_system_logs_window)
-        sidebar_layout.addWidget(self.sys_logs_btn)
-
         # Analytics (from existing open_analytics_window)
         self.analytics_btn = QPushButton("Analytics")
         self.analytics_btn.setProperty("class", "sidebar_item")
@@ -350,8 +344,8 @@ class MainWindow(QWidget):
 
         right_content_layout.addLayout(top_bar_layout)
 
-        # Console Window Label
-        console_label = QLabel("Console window")
+        # Console Window Label renamed to System logs
+        console_label = QLabel("System logs")
         console_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #aaa; margin-top: 10px;")
         right_content_layout.addWidget(console_label)
 
@@ -417,7 +411,7 @@ class MainWindow(QWidget):
                 f.write("#!/bin/bash\n")
                 f.write(f"{command}\n")
                 f.write("if [ $? -ne 0 ]; then\n")
-                f.write(f"    echo 'Error: {command} failed'\n")
+                f.write("    echo 'Error: {command} failed'\n")
                 f.write("    read -p 'Press Enter to close this terminal...'\n")
                 f.write("    exit 1\n")
                 f.write("fi\n")
